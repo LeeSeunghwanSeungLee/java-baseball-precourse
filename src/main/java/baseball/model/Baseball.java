@@ -9,10 +9,6 @@ public class Baseball {
         this.no = no;
     }
 
-    public boolean isValid() {
-        return no <= 9 && no >0;
-    }
-
     public int getPosition() {
         return this.position;
     }
@@ -22,11 +18,27 @@ public class Baseball {
     }
 
     public BallScore compare(Baseball ball) {
-        if (this.no == ball.getNumber() && this.position == ball.getPosition())
+        if (this.equals(ball))
             return BallScore.Strike;
-        else if (this.no == ball.getNumber() && this.position != ball.getPosition())
+        else if (this.isBall(ball))
             return BallScore.Ball;
 
         return BallScore.Nothing;
     }
+
+    private boolean isBall(Baseball ball) {
+        return no == ball.getNumber() && position != ball.getPosition();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Baseball target = (Baseball) obj;
+        return position == target.getPosition() && no == target.getNumber();
+    }
+
+    public boolean isValid() {
+        return no <= 9 && no >0;
+    }
+
+
 }
