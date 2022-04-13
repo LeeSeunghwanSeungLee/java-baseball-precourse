@@ -1,7 +1,7 @@
 package baseball.model;
 
 public enum BallScore {
-    Strike(0), Ball(1), Nothing(2);
+    Strike(2), Ball(1), Nothing(0);
 
     private final int value;
 

@@ -39,6 +39,4 @@ public class Baseball {
     public boolean isValid() {
         return no <= 9 && no >0;
     }
-
-
 }
