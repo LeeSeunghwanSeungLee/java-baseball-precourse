@@ -1,13 +1,17 @@
-package baseball.model;
+package baseball.repository;
+
+import baseball.model.BallScore;
+import baseball.model.Baseball;
+import baseball.model.PlayResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Balls {
+public class PlayInning {
     private List<Baseball> baseballList;
     private final int size = 3;
 
-    public Balls(List<Integer> answer) {
+    public PlayInning(List<Integer> answer) {
         baseballList = new ArrayList<Baseball>();
         // update
         for (int i = 0; i < size; i++) {
@@ -38,7 +42,7 @@ public class Balls {
     }
 
     public PlayResult play(List<Integer> userBallNumber) {
-        Balls userBalls = new Balls(userBallNumber);
+        PlayInning userBalls = new PlayInning(userBallNumber);
         PlayResult result = new PlayResult();
 
         for (Baseball ball: baseballList) {
