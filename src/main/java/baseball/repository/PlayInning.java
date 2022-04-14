@@ -12,14 +12,12 @@ public class PlayInning {
     private final int size = 3;
 
     public PlayInning(List<Integer> answer) {
-        baseballList = new ArrayList<Baseball>();
-        // update
-        for (int i = 0; i < size; i++) {
-            baseballList.add(new Baseball(i + 1, answer.get(i)));
-        }
+        createBalls(answer);
     }
 
     private void createBalls(List<Integer> answer) {
+        baseballList = new ArrayList<>();
+
         for (int i = 0; i < size; i++) {
             baseballList.add(new Baseball(i + 1, answer.get(i))); // input -> position, number
         }
