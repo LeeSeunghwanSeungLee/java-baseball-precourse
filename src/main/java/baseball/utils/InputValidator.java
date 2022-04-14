@@ -5,6 +5,8 @@ import java.util.List;
 
 public class InputValidator {
 
+    private InputValidator() {}
+
     public static void validateInputType(String rawInput) {
         try {
             int number = Integer.parseInt(rawInput);
