@@ -33,7 +33,7 @@ class PlayInningTest {
 
     @DisplayName("공 세개와 한개 비교하여 스트라이크 검증")
     @Test
-    void playStrike(){
+    void playStrike() {
         PlayInning answers = new PlayInning(Arrays.asList(1,2,3));
         BallScore result = answers.play(new Baseball(1,1));
         assertThat(result).isEqualTo(BallScore.Strike);
@@ -41,7 +41,7 @@ class PlayInningTest {
 
     @DisplayName("공 세개와 한개 비교하여 볼 검증")
     @Test
-    void playBall(){
+    void playBall() {
         PlayInning answers = new PlayInning(Arrays.asList(1,2,3));
         BallScore result = answers.play(new Baseball(1,2));
         assertThat(result).isEqualTo(BallScore.Ball);
@@ -49,7 +49,7 @@ class PlayInningTest {
 
     @DisplayName("공 세개와 한개 비교하여 낫싱 검증")
     @Test
-    void playNothing(){
+    void playNothing() {
         PlayInning answers = new PlayInning(Arrays.asList(1,2,3));
         BallScore result = answers.play(new Baseball(1,4));
         assertThat(result).isEqualTo(BallScore.Nothing);
@@ -57,5 +57,35 @@ class PlayInningTest {
         answers = new PlayInning(Arrays.asList(1,2,3));
         result = answers.play(new Baseball(2,4));
         assertThat(result).isEqualTo(BallScore.Nothing);
+    }
+
+    @DisplayName("낫싱 검증")
+    @Test
+    void playNothingOfThreeBall() {
+        PlayInning answer = new PlayInning(Arrays.asList(1, 2, 3));
+        PlayResult result = answer.play(Arrays.asList(7, 5, 6));
+
+        assertThat(result.getStrike()).isEqualTo(0);
+        assertThat(result.getBall()).isEqualTo(0);
+    }
+
+    @DisplayName("1스트라이크 1볼 테스트")
+    @Test
+    void oneStrikeOneBall() {
+        PlayInning answer = new PlayInning(Arrays.asList(1, 2, 3));
+        PlayResult result = answer.play(Arrays.asList(3, 2, 9));
+
+        assertThat(result.getStrike()).isEqualTo(1);
+        assertThat(result.getBall()).isEqualTo(1);
+    }
+
+    @DisplayName("3 스트라이크 테스트")
+    @Test
+    void threeStrike() {
+        PlayInning answer = new PlayInning(Arrays.asList(7, 2, 3));
+        PlayResult result = answer.play(Arrays.asList(7, 2, 3));
+
+        assertThat(result.getStrike()).isEqualTo(3);
+        assertThat(result.getBall()).isEqualTo(0);
     }
 }
