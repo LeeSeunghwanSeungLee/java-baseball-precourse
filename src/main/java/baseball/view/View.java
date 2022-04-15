@@ -2,8 +2,8 @@ package baseball.view;
 
 public enum View {
     EnterNumber("숫자를 입력해주세요: "),
-    GameEnd("3개의숫자를모두맞히셨습니다!게임끝\n"),
-    RestartGameOrQuit("게임을새로시작하려면1 , 종료하려면2를입력하세요.\n");
+    GameEnd("3개의숫자를모두맞히셨습니다! 게임 종료\n"),
+    RestartGameOrQuit("게임을새로시작하려면 1 , 종료하려면 2를입력하세요.\n");
 
     public static void playResult(String result){
         System.out.println(result);
