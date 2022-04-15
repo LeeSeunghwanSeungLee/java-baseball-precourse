@@ -60,7 +60,7 @@ public class InputValidator {
             throw new IllegalArgumentException(errorComment);
     }
 
-    private static List<Integer> changeStringToNumberList(String rawInput) {
+    public static List<Integer> changeStringToNumberList(String rawInput) {
         List<Integer> res = new ArrayList<>();
         String[] numbers = rawInput.split("");
 
