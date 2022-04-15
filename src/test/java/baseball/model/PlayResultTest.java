@@ -17,7 +17,6 @@ class PlayResultTest {
 
         // when
         result.updateReport(BallScore.Ball);
-        result.updateReport(BallScore.Nothing);
         result.updateReport(BallScore.Strike);
         result.updateReport(BallScore.Strike);
 
@@ -50,12 +49,62 @@ class PlayResultTest {
 
         // when
         result.updateReport(BallScore.Ball);
-        result.updateReport(BallScore.Nothing);
         result.updateReport(BallScore.Ball);
         result.updateReport(BallScore.Strike);
 
         // then
         assertThat(result.getStrike()).isEqualTo(1);
         assertThat(result.getBall()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("toString() 메소드 테스트")
+    void 문자열반환() {
+        // given
+        PlayResult result = new PlayResult();
+
+        // when
+        result.updateReport(BallScore.Ball);
+        result.updateReport(BallScore.Ball);
+        result.updateReport(BallScore.Strike);
+
+        // then
+        assertThat(result.getStrike()).isEqualTo(1);
+        assertThat(result.getBall()).isEqualTo(2);
+        assertThat(result.toString()).isEqualTo("1스트라이크 2볼");
+    }
+
+    @Test
+    @DisplayName("toString() 메소드 테스트")
+    void 문자열반환2() {
+        // given
+        PlayResult result = new PlayResult();
+
+        // when
+        result.updateReport(BallScore.Strike);
+        result.updateReport(BallScore.Strike);
+        result.updateReport(BallScore.Strike);
+
+        // then
+        assertThat(result.getStrike()).isEqualTo(3);
+        assertThat(result.getBall()).isEqualTo(0);
+        assertThat(result.toString()).isEqualTo("3스트라이크");
+    }
+
+    @Test
+    @DisplayName("toString() 메소드 테스트")
+    void 문자열반환3() {
+        // given
+        PlayResult result = new PlayResult();
+
+        // when
+        result.updateReport(BallScore.Ball);
+        result.updateReport(BallScore.Ball);
+        result.updateReport(BallScore.Ball);
+
+        // then
+        assertThat(result.getStrike()).isEqualTo(0);
+        assertThat(result.getBall()).isEqualTo(3);
+        assertThat(result.toString()).isEqualTo("3볼");
     }
 }

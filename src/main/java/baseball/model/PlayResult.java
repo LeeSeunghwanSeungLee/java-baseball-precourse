@@ -27,4 +27,43 @@ public class PlayResult {
             this.ball++;
         }
     }
+
+    @Override
+    public String toString() {
+        if (isNothing())
+            return "낫싱"; /// TODO -> constant 변경
+
+        if (isZeroBall())
+            return strike + "스트라이크"; // TODO -> constant 변경
+
+        if (isZeroStrike())
+            return ball + "볼"; // TODO -> constant 변경
+
+        return strike + "스트라이크 " + ball + "볼";
+    }
+
+    public boolean isGameEnd() {
+        return strike == 3; // TODO -> constant 변경
+    }
+
+    private boolean isNothing() {
+        if (ball == 0 && strike == 0)
+            return true;
+
+        return false;
+    }
+
+    private boolean isZeroStrike() {
+        if (strike == 0)
+            return true;
+
+        return false;
+    }
+
+    private boolean isZeroBall() {
+        if (ball == 0)
+            return true;
+
+        return false;
+    }
 }
