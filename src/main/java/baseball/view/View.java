@@ -20,8 +20,4 @@ public enum View {
         System.out.print(this.screenSubTitle);
     }
 
-    public String getStringToprint() {
-        return screenSubTitle;
-    }
-
 }
