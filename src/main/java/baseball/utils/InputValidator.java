@@ -1,5 +1,6 @@
 package baseball.utils;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class InputValidator {
         try {
             int number = Integer.parseInt(rawInput);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("[ERROR] - 숫자만 입력바랍니다.");
+            throw new IllegalArgumentException("[ERROR] - 숫자만 입력바랍니다.");
         }
     }
 
@@ -27,7 +28,7 @@ public class InputValidator {
     }
 
     public static void validateNumberRange(String rawInput) {
-        List<Integer> userTrialNumber = InputValidator.changeStringToNumberList(rawInput);
+        List<Integer> userTrialNumber = TypeTransformer.changeString2List(rawInput);
         InputValidator.validateNumberRange(userTrialNumber);
     }
 
@@ -43,7 +44,7 @@ public class InputValidator {
     }
 
     public static void validateEqualNumber(String rawInput) {
-        List<Integer> userTrialNumber = InputValidator.changeStringToNumberList(rawInput);
+        List<Integer> userTrialNumber = TypeTransformer.changeString2List(rawInput);
         InputValidator.validateEqualNumber(userTrialNumber);
     }
 
@@ -58,15 +59,5 @@ public class InputValidator {
 
         if (userTrialNumber.get(1) == userTrialNumber.get(2))
             throw new IllegalArgumentException(errorComment);
-    }
-
-    public static List<Integer> changeStringToNumberList(String rawInput) {
-        List<Integer> res = new ArrayList<>();
-        String[] numbers = rawInput.split("");
-
-        for (String num : numbers)
-            res.add(Integer.parseInt(num));
-
-        return res;
     }
 }

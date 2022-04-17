@@ -39,7 +39,7 @@ public class PlayResult {
         if (isZeroStrike())
             return ball + "볼"; // TODO -> constant 변경
 
-        return strike + "스트라이크 " + ball + "볼";
+        return ball + "볼 " + strike + "스트라이크";
     }
 
     public boolean isGameEnd() {

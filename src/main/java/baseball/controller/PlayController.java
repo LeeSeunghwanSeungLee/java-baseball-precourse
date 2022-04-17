@@ -2,10 +2,11 @@ package baseball.controller;
 
 import baseball.model.PlayResult;
 import baseball.repository.PlayInning;
-import baseball.utils.InputConsole;
 import baseball.utils.InputValidator;
 import baseball.utils.RandomNumber;
+import baseball.utils.TypeTransformer;
 import baseball.view.View;
+import camp.nextstep.edu.missionutils.Console;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class PlayController {
     private void play() {
         try {
             View.EnterNumber.print();
-            String consoleString = InputConsole.getStringFromConsole();
+            String consoleString = Console.readLine();
 
             InputValidator.validateInputType(consoleString);
             InputValidator.validateIsEmpty(consoleString);
@@ -31,7 +32,7 @@ public class PlayController {
             InputValidator.validateNumberRange(consoleString);
             InputValidator.validateEqualNumber(consoleString);
 
-            userBalls = InputValidator.changeStringToNumberList(consoleString);
+            userBalls = TypeTransformer.changeString2List(consoleString);
 
             PlayResult pr = this.computerBalls.play(userBalls);
             View.playResult(pr.toString());
@@ -62,7 +63,7 @@ public class PlayController {
     }
 
     private void isGameEnd() {
-        String userType = InputConsole.getStringFromConsole();
+        String userType = Console.readLine();
         if (userType.equals("1"))
             start();
         else if (userType.equals("2"))

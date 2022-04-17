@@ -12,7 +12,7 @@ class InputValidatorTest {
         String testInput = "asd";
 
         assertThatThrownBy(() -> InputValidator.validateInputType(testInput))
-                .isInstanceOf(NumberFormatException.class);
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
