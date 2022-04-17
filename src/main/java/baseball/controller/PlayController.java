@@ -1,7 +1,9 @@
 package baseball.controller;
 
+import baseball.model.BallScore;
 import baseball.model.PlayResult;
 import baseball.repository.PlayInning;
+import baseball.utils.InputHandler;
 import baseball.utils.InputValidator;
 import baseball.utils.RandomNumber;
 import baseball.utils.TypeTransformer;
@@ -12,62 +14,53 @@ import java.util.List;
 
 public class PlayController {
     private PlayInning computerBalls;
-    private List<Integer> userBalls;
+    private InputHandler inputHandler;
+    private PlayResult playResult;
+
+    public PlayController() {
+        this.inputHandler = new InputHandler();
+        this.playResult = new PlayResult();
+    }
 
     public void start() {
-        // 랜덤 결과를 생성한다 -> utils/RandomNumber
         computerBalls = new PlayInning(RandomNumber.make());
-
-        play();
+        playResult = new PlayResult();
+        while(!playResult.isGameEnd())
+            play();
+        win();
     }
 
     private void play() {
         try {
             View.EnterNumber.print();
-            String consoleString = Console.readLine();
-
-            InputValidator.validateInputType(consoleString);
-            InputValidator.validateIsEmpty(consoleString);
-            InputValidator.validateSize(consoleString);
-            InputValidator.validateNumberRange(consoleString);
-            InputValidator.validateEqualNumber(consoleString);
-
-            userBalls = TypeTransformer.changeString2List(consoleString);
-
-            PlayResult pr = this.computerBalls.play(userBalls);
-            View.playResult(pr.toString());
-            isWin(pr);
+            String input = Console.readLine();
+            List<Integer> userBalls = inputHandler.makeNumberList(input);
+            playResult =  computerBalls.play(userBalls);
+            View.playResult(playResult.toString());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            View.playResult(e.getMessage());
             play();
         }
     }
 
-    private void isWin(PlayResult pr) {
-        if (pr.isGameEnd()) {
-            View.GameEnd.print();
-            View.RestartGameOrQuit.print();
-            restartOrQuit();
-            return;
-        }
-        play();
+    private void win() {
+        View.GameEnd.print();
+        restartOrQuit();
     }
 
     private void restartOrQuit() {
         try {
+            View.RestartGameOrQuit.print();
             isGameEnd();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            View.playResult(e.getMessage());
             restartOrQuit();
         }
     }
 
     private void isGameEnd() {
-        String userType = Console.readLine();
-        if (userType.equals("1"))
+        String input = Console.readLine();
+        if (inputHandler.isRegame(input))
             start();
-        else if (userType.equals("2"))
-            System.exit(0);
-        throw new IllegalArgumentException("[ERROR] -> 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     }
 }

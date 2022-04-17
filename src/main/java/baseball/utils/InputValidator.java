@@ -54,7 +54,7 @@ public class InputValidator {
         if (userTrialNumber.get(0) == userTrialNumber.get(1))
             throw new IllegalArgumentException(errorComment);
 
-        if (userTrialNumber.get(0) == userTrialNumber.get(1))
+        if (userTrialNumber.get(0) == userTrialNumber.get(2))
             throw new IllegalArgumentException(errorComment);
 
         if (userTrialNumber.get(1) == userTrialNumber.get(2))
