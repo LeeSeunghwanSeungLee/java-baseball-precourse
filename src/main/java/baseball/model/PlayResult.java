@@ -1,5 +1,8 @@
 package baseball.model;
 
+import baseball.config.BaseballConfig;
+import baseball.config.ResultMessageConfig;
+
 public class PlayResult {
 
     private int strike;
@@ -31,19 +34,19 @@ public class PlayResult {
     @Override
     public String toString() {
         if (isNothing())
-            return "낫싱"; /// TODO -> constant 변경
+            return ResultMessageConfig.Nothing.getState();
 
         if (isZeroBall())
-            return strike + "스트라이크"; // TODO -> constant 변경
+            return strike + ResultMessageConfig.Strike.getState();
 
         if (isZeroStrike())
-            return ball + "볼"; // TODO -> constant 변경
+            return ball + ResultMessageConfig.Ball.getState();
 
-        return ball + "볼 " + strike + "스트라이크";
+        return ball + ResultMessageConfig.Ball.getState() + " " + strike + ResultMessageConfig.Strike.getState();
     }
 
     public boolean isGameEnd() {
-        return strike == 3; // TODO -> constant 변경
+        return strike == BaseballConfig.BaseballSize.getConfigInt();
     }
 
     private boolean isNothing() {
