@@ -20,7 +20,7 @@ public class Baseball {
     public BallScore compare(Baseball ball) {
         if (this.equals(ball))
             return BallScore.Strike;
-        else if (this.isBall(ball))
+        if (this.isBall(ball))
             return BallScore.Ball;
 
         return BallScore.Nothing;
