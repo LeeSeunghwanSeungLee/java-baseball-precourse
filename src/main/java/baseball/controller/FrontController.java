@@ -25,13 +25,12 @@ public class FrontController {
 
     public void service() {
         makeComputerBalls();
-        logic();
+        try {
+            logic();
+        } catch (Exception e) {
+            View.showSubtitle(e.getMessage());
+        }
     }
-
-//    public void reService(Exception e) {
-//        View.showSubtitle(e.getMessage());
-//        logic();
-//    }
 
     public void logic() {
         PlayResult playResult;

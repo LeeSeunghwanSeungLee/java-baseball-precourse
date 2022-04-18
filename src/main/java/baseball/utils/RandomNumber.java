@@ -19,7 +19,10 @@ public class RandomNumber {
     }
 
     private static void makeRandomNumber(List<Integer> randomNumbers) {
-        int randomNum = Randoms.pickNumberInRange(1, 9);
+        int start = BaseballConfig.StartRange.getConfigInt();
+        int end = BaseballConfig.EndRange.getConfigInt();
+
+        int randomNum = Randoms.pickNumberInRange(start, end);
         if (RandomNumber.checkExistNumber(randomNumbers, randomNum)) {
             RandomNumber.makeRandomNumber(randomNumbers);
             return;
@@ -29,7 +32,8 @@ public class RandomNumber {
 
     private static boolean checkExistNumber(List<Integer> randomNumbers, Integer number) {
         for (int i = 0; i < randomNumbers.size(); i++) {
-            if (number.equals(randomNumbers.get(i))) return true;
+            if (number.equals(randomNumbers.get(i)))
+                return true;
         }
         return false;
     }
