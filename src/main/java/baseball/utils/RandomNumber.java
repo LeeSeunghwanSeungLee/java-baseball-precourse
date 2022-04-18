@@ -1,5 +1,6 @@
 package baseball.utils;
 
+import baseball.config.BaseballConfig;
 import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class RandomNumber {
 
     public static List<Integer> make() {
         List<Integer> randomNumbers = new ArrayList<>();
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < BaseballConfig.BaseballSize.getConfigInt(); i++)
             RandomNumber.makeRandomNumber(randomNumbers);
 
         return randomNumbers;
