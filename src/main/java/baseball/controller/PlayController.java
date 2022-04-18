@@ -10,87 +10,42 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
 
 public class PlayController {
-    private PlayBallList computerBalls;
-    private PlayResult playResult;
 
-    public PlayController() {
-        this.playResult = new PlayResult();
+    private static PlayController playController = null;
+
+    private PlayController() {}
+
+    public synchronized static PlayController getInstance() {
+        if (playController == null)
+            playController = new PlayController();
+        return playController;
     }
-
-    public void startGame() {
-        computerBalls = new PlayBallList(RandomNumber.make());
-        playResult = new PlayResult();
-        playGame();
-    }
-
-    protected void playGame() {
+    public PlayResult playOnScreen(PlayBallList computerBalls) {
         View.EnterNumber.print();
+        PlayResult result = playMain(computerBalls);
+        View.showSubtitle(result.toString());
+        return result;
+    }
+
+    private PlayResult playMain(PlayBallList computerBalls) {
         String input = Console.readLine();
         List<Integer> userBalls = InputHandler.getInstance().makeNumberList(input);
-        playResult =  computerBalls.compareBallList(userBalls);
-        View.showSubtitle(playResult.toString());
-        if (checkEnd())
-            commentWin();
+        return computerBalls.compareBallList(userBalls);
     }
 
-    public boolean checkEnd() {
-        if (playResult.isGameEnd())
-            return true;
-        return false;
+    public boolean isWrongAnswer(PlayResult pr) {
+        if (pr.isGameEnd()) {
+            View.GameEnd.print();
+            return false;
+        }
+        return true;
     }
 
-    public void commentWin() {
-        View.GameEnd.print();
-        askRestart();
-    }
-
-    private void askRestart() {
+    public boolean isRegame() {
         View.RestartGameOrQuit.print();
         String input = Console.readLine();
         if (InputHandler.getInstance().isRegame(input))
-            startGame();
-    }
-
-
-    public void start() {
-        computerBalls = new PlayBallList(RandomNumber.make());
-        playResult = new PlayResult();
-        while(!playResult.isGameEnd())
-            play();
-        win();
-    }
-
-    private void play() {
-        View.EnterNumber.print();
-        String input = Console.readLine();
-        try {
-            List<Integer> userBalls = InputHandler.getInstance().makeNumberList(input);
-            playResult =  computerBalls.compareBallList(userBalls);
-            View.showSubtitle(playResult.toString());
-        } catch (Exception e) {
-            View.showSubtitle(e.getMessage());
-            play();
-        }
-    }
-
-    private void win() {
-        View.GameEnd.print();
-        restartOrQuit();
-    }
-
-    private void restartOrQuit() {
-        try {
-            View.RestartGameOrQuit.print();
-            isGameEnd();
-        } catch (Exception e) {
-            View.showSubtitle(e.getMessage());
-            restartOrQuit();
-        }
-    }
-
-    private void isGameEnd() {
-        String input = Console.readLine();
-        if (InputHandler.getInstance().isRegame(input))
-            start();
+            return true;
+        return false;
     }
 }
