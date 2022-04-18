@@ -7,11 +7,11 @@ import baseball.model.PlayResult;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayInning {
+public class PlayBallList {
     private List<Baseball> baseballList;
     private final int size = 3;
 
-    public PlayInning(List<Integer> answer) {
+    public PlayBallList(List<Integer> answer) {
         createBalls(answer);
     }
 
@@ -39,8 +39,8 @@ public class PlayInning {
         return statusNum == BallScore.Strike.getValue() ? BallScore.Strike : BallScore.Ball;
     }
 
-    public PlayResult play(List<Integer> userBallNumber) {
-        PlayInning userBalls = new PlayInning(userBallNumber);
+    public PlayResult compareBallList(List<Integer> userBallNumber) {
+        PlayBallList userBalls = new PlayBallList(userBallNumber);
         PlayResult result = new PlayResult();
 
         for (Baseball ball: baseballList) {

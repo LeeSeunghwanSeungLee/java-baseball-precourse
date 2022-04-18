@@ -11,7 +11,7 @@ public class InputHandler {
 
     private InputHandler() {}
 
-    public static InputHandler getInstance() {
+    public synchronized static InputHandler getInstance() {
         if (inputHandler == null)
             inputHandler = new InputHandler();
         return inputHandler;

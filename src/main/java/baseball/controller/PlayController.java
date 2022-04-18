@@ -2,7 +2,7 @@ package baseball.controller;
 
 import baseball.model.BallScore;
 import baseball.model.PlayResult;
-import baseball.repository.PlayInning;
+import baseball.repository.PlayBallList;
 import baseball.utils.InputHandler;
 import baseball.utils.InputValidator;
 import baseball.utils.RandomNumber;
@@ -13,7 +13,7 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
 
 public class PlayController {
-    private PlayInning computerBalls;
+    private PlayBallList computerBalls;
     private PlayResult playResult;
 
     public PlayController() {
@@ -21,7 +21,7 @@ public class PlayController {
     }
 
     public void startGame() {
-        computerBalls = new PlayInning(RandomNumber.make());
+        computerBalls = new PlayBallList(RandomNumber.make());
         playResult = new PlayResult();
         playGame();
     }
@@ -30,7 +30,7 @@ public class PlayController {
         View.EnterNumber.print();
         String input = Console.readLine();
         List<Integer> userBalls = InputHandler.getInstance().makeNumberList(input);
-        playResult =  computerBalls.play(userBalls);
+        playResult =  computerBalls.compareBallList(userBalls);
         View.showSubtitle(playResult.toString());
         if (checkEnd())
             commentWin();
@@ -56,7 +56,7 @@ public class PlayController {
 
 
     public void start() {
-        computerBalls = new PlayInning(RandomNumber.make());
+        computerBalls = new PlayBallList(RandomNumber.make());
         playResult = new PlayResult();
         while(!playResult.isGameEnd())
             play();
@@ -68,7 +68,7 @@ public class PlayController {
         String input = Console.readLine();
         try {
             List<Integer> userBalls = InputHandler.getInstance().makeNumberList(input);
-            playResult =  computerBalls.play(userBalls);
+            playResult =  computerBalls.compareBallList(userBalls);
             View.showSubtitle(playResult.toString());
         } catch (Exception e) {
             View.showSubtitle(e.getMessage());
