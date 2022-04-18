@@ -71,7 +71,7 @@ class PlayResultTest {
         // then
         assertThat(result.getStrike()).isEqualTo(1);
         assertThat(result.getBall()).isEqualTo(2);
-        assertThat(result.toString()).isEqualTo("1스트라이크 2볼");
+        assertThat(result.toString()).isEqualTo("2볼 1스트라이크");
     }
 
     @Test
