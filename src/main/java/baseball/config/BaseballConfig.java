@@ -1,8 +1,8 @@
 package baseball.config;
 
 public enum BaseballConfig {
-    Endgame("1"),
-    Regame("2"),
+    Regame("1"),
+    EndGame("2"),
     BaseballSize("3");
 
     private final String config;

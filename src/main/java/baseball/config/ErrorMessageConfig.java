@@ -5,7 +5,8 @@ public enum ErrorMessageConfig {
     InputEmpty("[ERROR] - 빈 값을 입력했습니다."),
     InputSize("[ERROR] - 3개의 숫자를 입력하셔야 합니다."),
     InputNumberRange("[ERROR] - 입력 숫자의 범위는 1 ~ 9 사이어야 합니다."),
-    InputSameNumber("[ERROR] - 동일한 숫자가 2번 이상 반복되었습니다.");
+    InputSameNumber("[ERROR] - 동일한 숫자가 2번 이상 반복되었습니다."),
+    InputExactNumber("[ERROR] -> 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
 
     private final String errorMsg;
 

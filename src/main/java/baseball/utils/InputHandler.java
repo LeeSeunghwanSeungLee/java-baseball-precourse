@@ -1,5 +1,7 @@
 package baseball.utils;
 
+import baseball.config.BaseballConfig;
+import baseball.config.ErrorMessageConfig;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.List;
@@ -21,10 +23,10 @@ public class InputHandler {
 
     public boolean isRegame(String input) {
         InputValidator.validateIsEmpty(input);
-        if (input.equals("1"))
+        if (input.equals(BaseballConfig.Regame.getConfig()))
             return true;
-        if (input.equals("2"))
+        if (input.equals(BaseballConfig.EndGame.getConfig()))
             return false;
-        throw new IllegalArgumentException("[ERROR] -> 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+        throw new IllegalArgumentException(ErrorMessageConfig.InputExactNumber.getErrorMessage());
     }
 }
