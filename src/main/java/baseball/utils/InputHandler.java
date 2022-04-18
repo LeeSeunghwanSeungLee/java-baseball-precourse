@@ -7,6 +7,15 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
 
 public class InputHandler {
+    private static InputHandler inputHandler = null;
+
+    private InputHandler() {}
+
+    public static InputHandler getInstance() {
+        if (inputHandler == null)
+            inputHandler = new InputHandler();
+        return inputHandler;
+    }
 
     public List<Integer> makeNumberList(String input) {
         validPipeline(input);

@@ -14,11 +14,9 @@ import java.util.List;
 
 public class PlayController {
     private PlayInning computerBalls;
-    private InputHandler inputHandler;
     private PlayResult playResult;
 
     public PlayController() {
-        this.inputHandler = new InputHandler();
         this.playResult = new PlayResult();
     }
 
@@ -31,7 +29,7 @@ public class PlayController {
     protected void playGame() {
         View.EnterNumber.print();
         String input = Console.readLine();
-        List<Integer> userBalls = inputHandler.makeNumberList(input);
+        List<Integer> userBalls = InputHandler.getInstance().makeNumberList(input);
         playResult =  computerBalls.play(userBalls);
         View.showSubtitle(playResult.toString());
         if (checkEnd())
@@ -52,7 +50,7 @@ public class PlayController {
     private void askRestart() {
         View.RestartGameOrQuit.print();
         String input = Console.readLine();
-        if (inputHandler.isRegame(input))
+        if (InputHandler.getInstance().isRegame(input))
             startGame();
     }
 
@@ -69,7 +67,7 @@ public class PlayController {
         View.EnterNumber.print();
         String input = Console.readLine();
         try {
-            List<Integer> userBalls = inputHandler.makeNumberList(input);
+            List<Integer> userBalls = InputHandler.getInstance().makeNumberList(input);
             playResult =  computerBalls.play(userBalls);
             View.showSubtitle(playResult.toString());
         } catch (Exception e) {
@@ -95,7 +93,7 @@ public class PlayController {
 
     private void isGameEnd() {
         String input = Console.readLine();
-        if (inputHandler.isRegame(input))
+        if (InputHandler.getInstance().isRegame(input))
             start();
     }
 }
