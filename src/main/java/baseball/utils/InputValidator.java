@@ -1,5 +1,7 @@
 package baseball.utils;
 
+import baseball.config.ErrorMessageConfig;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,19 +14,19 @@ public class InputValidator {
         try {
             int number = Integer.parseInt(rawInput);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] - 숫자만 입력바랍니다.");
+            throw new IllegalArgumentException(ErrorMessageConfig.InputType.getErrorMessage());
         }
     }
 
     public static void validateIsEmpty(String rawInput) {
         if (rawInput == null || rawInput.length() == 0) {
-            throw new IllegalArgumentException("[ERROR] - 빈 값을 입력했습니다.");
+            throw new IllegalArgumentException(ErrorMessageConfig.InputEmpty.getErrorMessage());
         }
     }
 
     public static void validateSize(String rawInput) {
         if (rawInput.length() != 3)
-            throw new IllegalArgumentException("[ERROR] - 3개의 숫자를 입력하셔야 합니다.");
+            throw new IllegalArgumentException(ErrorMessageConfig.InputSize.getErrorMessage());
     }
 
     public static void validateNumberRange(String rawInput) {
@@ -40,7 +42,7 @@ public class InputValidator {
 
     private static void isRange(Integer num) {
         if (num > 9 || num <= 0)
-            throw new IllegalArgumentException("[ERROR] - 입력 숫자의 범위는 1 ~ 9 사이어야 합니다.");
+            throw new IllegalArgumentException(ErrorMessageConfig.InputNumberRange.getErrorMessage());
     }
 
     public static void validateEqualNumber(String rawInput) {
@@ -49,7 +51,7 @@ public class InputValidator {
     }
 
     public static void validateEqualNumber(List<Integer> userTrialNumber) {
-        String errorComment = "[ERROR] - 동일한 숫자가 2번 이상 반복되었습니다.";
+        String errorComment = ErrorMessageConfig.InputSameNumber.getErrorMessage();
 
         if (userTrialNumber.get(0) == userTrialNumber.get(1))
             throw new IllegalArgumentException(errorComment);
