@@ -1,4 +1,4 @@
-package baseball.repository;
+package baseball.model.repository;
 
 import baseball.model.BallScore;
 import baseball.model.Baseball;

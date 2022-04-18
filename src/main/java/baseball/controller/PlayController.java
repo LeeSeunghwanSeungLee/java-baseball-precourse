@@ -1,12 +1,9 @@
 package baseball.controller;
 
-import baseball.model.BallScore;
 import baseball.model.PlayResult;
-import baseball.repository.PlayBallList;
+import baseball.model.repository.PlayBallList;
 import baseball.utils.InputHandler;
-import baseball.utils.InputValidator;
 import baseball.utils.RandomNumber;
-import baseball.utils.TypeTransformer;
 import baseball.view.View;
 import camp.nextstep.edu.missionutils.Console;
 

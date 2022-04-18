@@ -1,9 +1,8 @@
-package baseball.repository;
+package baseball.model.repository;
 
 import baseball.model.BallScore;
 import baseball.model.Baseball;
 import baseball.model.PlayResult;
-import baseball.repository.PlayBallList;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
