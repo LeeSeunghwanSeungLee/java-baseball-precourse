@@ -16,7 +16,7 @@ class PlayBallListTest {
     @DisplayName("볼, 스트라이크 몇개인지 검증")
     void playTest() {
         PlayBallList answer = new PlayBallList(Arrays.asList(1, 2, 3));
-        PlayResult result = answer.play(Arrays.asList(4, 5, 6));
+        PlayResult result = answer.compareBallList(Arrays.asList(4, 5, 6));
 
         assertThat(result.getStrike()).isEqualTo(0);
         assertThat(result.getBall()).isEqualTo(0);
@@ -63,7 +63,7 @@ class PlayBallListTest {
     @Test
     void playNothingOfThreeBall() {
         PlayBallList answer = new PlayBallList(Arrays.asList(1, 2, 3));
-        PlayResult result = answer.play(Arrays.asList(7, 5, 6));
+        PlayResult result = answer.compareBallList(Arrays.asList(7, 5, 6));
 
         assertThat(result.getStrike()).isEqualTo(0);
         assertThat(result.getBall()).isEqualTo(0);
@@ -73,7 +73,7 @@ class PlayBallListTest {
     @Test
     void oneStrikeOneBall() {
         PlayBallList answer = new PlayBallList(Arrays.asList(1, 2, 3));
-        PlayResult result = answer.play(Arrays.asList(3, 2, 9));
+        PlayResult result = answer.compareBallList(Arrays.asList(3, 2, 9));
 
         assertThat(result.getStrike()).isEqualTo(1);
         assertThat(result.getBall()).isEqualTo(1);
@@ -83,7 +83,7 @@ class PlayBallListTest {
     @Test
     void threeStrike() {
         PlayBallList answer = new PlayBallList(Arrays.asList(7, 2, 3));
-        PlayResult result = answer.play(Arrays.asList(7, 2, 3));
+        PlayResult result = answer.compareBallList(Arrays.asList(7, 2, 3));
 
         assertThat(result.getStrike()).isEqualTo(3);
         assertThat(result.getBall()).isEqualTo(0);
