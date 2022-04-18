@@ -22,6 +22,41 @@ public class PlayController {
         this.playResult = new PlayResult();
     }
 
+    public void startGame() {
+        computerBalls = new PlayInning(RandomNumber.make());
+        playResult = new PlayResult();
+        playGame();
+    }
+
+    protected void playGame() {
+        View.EnterNumber.print();
+        String input = Console.readLine();
+        List<Integer> userBalls = inputHandler.makeNumberList(input);
+        playResult =  computerBalls.play(userBalls);
+        View.showSubtitle(playResult.toString());
+        if (checkEnd())
+            commentWin();
+    }
+
+    public boolean checkEnd() {
+        if (playResult.isGameEnd())
+            return true;
+        return false;
+    }
+
+    public void commentWin() {
+        View.GameEnd.print();
+        askRestart();
+    }
+
+    private void askRestart() {
+        View.RestartGameOrQuit.print();
+        String input = Console.readLine();
+        if (inputHandler.isRegame(input))
+            startGame();
+    }
+
+
     public void start() {
         computerBalls = new PlayInning(RandomNumber.make());
         playResult = new PlayResult();
@@ -31,14 +66,14 @@ public class PlayController {
     }
 
     private void play() {
+        View.EnterNumber.print();
+        String input = Console.readLine();
         try {
-            View.EnterNumber.print();
-            String input = Console.readLine();
             List<Integer> userBalls = inputHandler.makeNumberList(input);
             playResult =  computerBalls.play(userBalls);
-            View.playResult(playResult.toString());
+            View.showSubtitle(playResult.toString());
         } catch (Exception e) {
-            View.playResult(e.getMessage());
+            View.showSubtitle(e.getMessage());
             play();
         }
     }
@@ -53,7 +88,7 @@ public class PlayController {
             View.RestartGameOrQuit.print();
             isGameEnd();
         } catch (Exception e) {
-            View.playResult(e.getMessage());
+            View.showSubtitle(e.getMessage());
             restartOrQuit();
         }
     }
