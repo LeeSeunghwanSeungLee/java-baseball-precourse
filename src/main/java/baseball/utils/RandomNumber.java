@@ -12,9 +12,9 @@ public class RandomNumber {
 
     public static List<Integer> make() {
         List<Integer> randomNumbers = new ArrayList<>();
-        for (int i = 0; i < BaseballConfig.BaseballSize.getConfigInt(); i++)
+        while(randomNumbers.size() < BaseballConfig.BaseballSize.getConfigInt()) {
             RandomNumber.makeRandomNumber(randomNumbers);
-
+        }
         return randomNumbers;
     }
 
@@ -22,19 +22,16 @@ public class RandomNumber {
         int start = BaseballConfig.StartRange.getConfigInt();
         int end = BaseballConfig.EndRange.getConfigInt();
 
-        int randomNum = Randoms.pickNumberInRange(start, end);
-        if (RandomNumber.checkExistNumber(randomNumbers, randomNum)) {
-            RandomNumber.makeRandomNumber(randomNumbers);
-            return;
-        }
-        randomNumbers.add(randomNum);
+        int newRandomNumber = Randoms.pickNumberInRange(start, end);
+        if (checkExistNumber(newRandomNumber, randomNumbers))
+            randomNumbers.add(newRandomNumber);
     }
 
-    private static boolean checkExistNumber(List<Integer> randomNumbers, Integer number) {
-        for (int i = 0; i < randomNumbers.size(); i++) {
-            if (number.equals(randomNumbers.get(i)))
-                return true;
-        }
-        return false;
+    private static boolean checkExistNumber( Integer newNumber, List<Integer> randomNumbers) {
+        int checkNum = 0;
+        for (Integer oldNum : randomNumbers)
+            checkNum += (oldNum == newNumber) ? 1 : 0;
+
+        return checkNum == 0;
     }
 }

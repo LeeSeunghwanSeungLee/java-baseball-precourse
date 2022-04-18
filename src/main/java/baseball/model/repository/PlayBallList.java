@@ -19,19 +19,18 @@ public class PlayBallList {
         baseballList = new ArrayList<>();
 
         for (int i = 0; i < size; i++) {
-            baseballList.add(new Baseball(i + 1, answer.get(i))); // input -> position, number
+            baseballList.add(new Baseball(i + 1, answer.get(i)));
         }
     }
 
     public BallScore play(Baseball ball) {
         int statusNum = 0;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++)
             statusNum += baseballList.get(i).compare(ball).getValue();
-        }
 
-        if (statusNum == BallScore.Nothing.getValue()) {
+        if (statusNum == BallScore.Nothing.getValue())
             return BallScore.Nothing;
-        }
+
         return strikeOrBall(statusNum);
     }
 
